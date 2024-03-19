@@ -1,0 +1,62 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined');
+*, :root, ::before, ::after {
+    --primary-hsl: 14, 79%, 64%;
+    --secondary-hsl: 220, 12%, 39%;
+    --base-hsl: 225, 15%, 17%;
+    
+
+    --primary-color: hsl(var(--primary-hsl), 1);
+    --primary-color-80: hsl(var(--primary-hsl), 0.8);
+
+    --base-color: hsl(var(--base-hsl), 1);
+    --base-color-90: hsl(var(--base-hsl), 0.9);
+    --base-color-10: hsl(var(--base-hsl), 0.1);
+
+    --secondary-color: hsl(var(--secondary-hsl), 1);
+    --secondary-color-30: hsl(var(--secondary-hsl), .3);
+    --body-font: 'Roboto', sans-serif;	
+    --display-font: 'Poppins', sans-serif;
+
+    --base-gradient: linear-gradient(to bottom, hsl(221,42%,0%) 0%, hsl(221,42%,27%) 60%, hsla(221,42%,0%) 100%);
+
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: var(--body-font);
+    line-height: 1.2em;
+    color: var(--secondary-color);
+}
+
+body {
+    overflow: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--display-font);
+}
+
+.tag {
+    color: hsla(0, 0%, 100%, 0.6);
+    background-color: var(--primary-color-80);
+    font-family: var(--display-font);
+    font-size: 0.625em;
+    padding: 4px 8px;
+    border-radius: 4px;
+    &[color="secondary"] {
+        background-color: hsla(0, 0%, 100%, 0.6);
+        color: #000;
+    }
+    &[color="accent"] {
+        background-color: #D4C2B0;
+        color: hsla(0, 0%, 0%, 0.6);
+    }
+}
+
+img {
+    width: 100%;
+}
+
+.button {
+    --button-border-radius: 25px;
+}

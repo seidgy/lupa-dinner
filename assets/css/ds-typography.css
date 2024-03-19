@@ -1,0 +1,123 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@300');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,200;0,400;0,600;0,800;1,200;1,400;1,600;1,800&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,600;0,8..60,800;1,8..60,200;1,8..60,300;1,8..60,400;1,8..60,600;1,8..60,800&display=swap');
+
+:root, :after, :before {
+  /* Set the project fonts */
+  --display-font: 'Montserrat', sans-serif;
+  --body-font: 'Merriweather', serif;
+  --icon-font: 'Material Symbols Outlined';
+  --icon-weight: 300; /* This variable is here in case we have multiple weights of the material symbols. */
+  --base-font-size: 16px;
+}
+
+body {
+    font-family: var(--body-font);
+    font-size: var(--base-font-size);
+    color: var(--base-text-color);
+    line-height: var(--base-line-height);
+    font-weight: var(--base-font-weight);
+    font-variant-numeric: lining-nums;     /* high-level property          */
+    -moz-font-feature-settings: 'lnum';    /* low-level (old Firefox)      */
+    -webkit-font-feature-settings: 'lnum'; /* low-level (old Webkit)       */
+    font-feature-settings: 'lnum' on;      /* low-level (all new browsers) */
+  }
+  
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 { 
+    margin-block-start: 0;
+    margin-block-end: 0;
+  }
+  
+  /* 
+    [data-style="hX"] Allows us to assign the respective heading style to another heading.
+    This is a tool to decouple the markup hierarchy from the visual styles when necessary. 
+    Mainly used to maintain accessibility and HTML validation.
+  */
+  
+  h1, [data-style="h1"], [visual="h1"] {
+    font-family:  var(--h1-font-family); 
+    font-size:    var(--h1-font-size  );
+    color:        var(--h1-text-color );
+    line-height:  var(--h1-line-height);
+    font-weight:  var(--h1-font-weight);
+  }
+  
+  h2, [data-style="h2"], [visual="h2"] {
+    font-family:  var(--h2-font-family); 
+    font-size:    var(--h2-font-size  );
+    color:        var(--h2-text-color );
+    line-height:  var(--h2-line-height);
+    font-weight:  var(--h2-font-weight);
+  }
+  
+  h3, [data-style="h3"], [visual="h3"] {
+    font-family:  var(--h3-font-family); 
+    font-size:    var(--h3-font-size  );
+    color:        var(--h3-text-color );
+    line-height:  var(--h3-line-height);
+    font-weight:  var(--h3-font-weight);
+  }
+  
+  h4, [data-style="h4"], [visual="h4"] {
+    font-family:  var(--h4-font-family); 
+    font-size:    var(--h4-font-size  );
+    color:        var(--h4-text-color );
+    line-height:  var(--h4-line-height);
+    font-weight:  var(--h4-font-weight);
+  }
+  
+  h5, [data-style="h5"], [visual="h5"] {
+    font-family:  var(--h5-font-family); 
+    font-size:    var(--h5-font-size  );
+    color:        var(--h5-text-color );
+    line-height:  var(--h5-line-height);
+    font-weight:  var(--h5-font-weight);
+  }
+  
+  h6, [data-style="h6"], [visual="h6"] {
+    font-family:  var(--h6-font-family); 
+    font-size:    var(--h6-font-size  );
+    color:        var(--h6-text-color );
+    line-height:  var(--h6-line-height);
+    font-weight:  var(--h6-font-weight);
+  }
+  
+  /* Styling basic lists that don't have a class on them */
+  ul:not([class]), 
+  ol:not([class]) { padding-left: 1rem; }
+  
+  /* Styling basic links that don't have a class on them */
+  a:not([class]) { 
+    text-decoration: none; 
+    color: var(--primary-color);
+  }
+  
+  a:not([class]):hover { text-decoration: underline; }
+  
+  mark {
+    background-color: hsla(var(--accent-hsl), .16);
+    margin-left: -2px;
+    padding-left: 2px;
+    margin-right: -2px;
+    padding-right: 2px;
+  }
+  
+  /* Should we create other "hooks" and options for this utility? */
+  [data-caps="cap"] { text-transform: uppercase; }
+  
+  /* This is an automatic way to assign a bold that is not too strong nor too weak.
+     Typography best practices say we should use a "bold" that is two levels higher than
+     your regular weight. Ex: If you regular weight is 400, you should use 600 or 700.
+  */
+  strong { font-weight: calc(var(--base-font-weight) + 300); }
+  
+  hr {
+    width: 100%;
+    border: 0;
+    border-bottom: var(--base-border);
+  }
+  
