@@ -135,14 +135,12 @@
                 </div>
             </div>
         </div>
-        <div class="buttons">
-            <button class="button button--icon previous-button" visual="primary" color="primary" @click="previous" icon-before="arrow_back" v-if="data.currentTab > 0">
-                Voltar
-            </button>
-            <button class="button button--icon next-button" visual="primary" color="primary" @click="next" icon-after="arrow_forward">
-                Próximo
-            </button>
-        </div>
+        <button class="button button--icon previous-button" visual="primary" color="primary" @click="previous" icon-before="arrow_back" v-if="data.currentTab > 0">
+            Voltar
+        </button>
+        <button class="button button--icon next-button" visual="primary" color="primary" @click="next" icon-after="arrow_forward">
+            Próximo
+        </button>
     </main>
 </template>
 
@@ -213,26 +211,28 @@ main {
         opacity: 0;
     }
 
-.buttons {
-    position: absolute;
-    bottom: var(--s3);
-    left: var(--s3);
-    right: var(--s3);
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: space-between;
-    z-index: 0;
-    .next-button {
-        margin-left: auto;
+    .button {
+        position: absolute;
+        bottom: var(--s3);
+        left: var(--s3);
+        display: flex;
+        flex-flow: row nowrap;
+        justify-content: space-between;
+        z-index: 0;
+        z-index: 999;
     }
-}
+
+    .next-button {
+        right: var(--s3);
+        left: auto;
+    }
 
 .content {
     display: flex;
     flex-flow: column nowrap;
     justify-content: space-between;
     align-items: center;
-    height: 85%;
+    height: 110vh;
     position: relative;
     z-index: 1;
 }

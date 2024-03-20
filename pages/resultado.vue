@@ -1,8 +1,14 @@
 <template>
     <main>
-        <div class="arc arc--out"></div>
-        <div class="arc arc--in"></div>
-        <div class="car-info" id="perfil1">
+        <div class="arc arc--out arc--out-hidden"></div>
+        <div class="arc arc--in arc--in-hidden"></div>
+        <div class="header translucid">
+            <nuxt-link to="/" class="header__backwards">
+                <span class="material-symbols-outlined">arrow_back</span> Voltar
+            </nuxt-link>
+            <powered-by :horizontal="true"></powered-by>
+        </div>
+        <div class="car-info translucid" id="perfil1">
             <div class="car-info__header">
                 <p>Seu carro ideal é</p>
                 <h1 class="car-info__title">Hillux SW4 - 2024</h1>
@@ -141,15 +147,61 @@
 </template>
 
 <script setup>
+import { onMounted } from 'vue';
 
+onMounted(() => {
+    window.setTimeout(() => {
+        document.querySelector('.arc--out').classList.remove('arc--out-hidden');
+    }, 200);
+
+    window.setTimeout(() => {
+        document.querySelector('.arc--in').classList.remove('arc--in-hidden');
+    }, 500);
+
+    window.setTimeout(() => {
+        document.querySelector('.car-info').classList.remove('translucid');
+        document.querySelector('.header').classList.remove('translucid');
+        document.querySelector('.car-info__imagem').classList.add('car-info__imagem--animate');
+    }, 1000);
+
+    window.setTimeout(() => {
+        document.querySelector('.arc--out').classList.add('arc--out--activate');
+    }, 1200);
+});
 </script>
 
 <style lang="scss" scoped>
+    .header {
+        height: 86px;
+        position: relative;
+        width: 1200px;
+        margin: 0 auto;
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: center;
+        opacity: 1;
+        transition: opacity 0.5s ease-out;
+    }
+
+        .header__backwards {
+            display: flex;
+            flex-flow: row nowrap;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .header__backwards, .header__backwards span {
+            color: var(--primary-color);
+            font-weight: 600;
+            text-decoration: none;
+        }
+
     .arc {
         position: absolute;
         left: 0;
         right: 0;
         border-radius: 56px 56px 0 0;
+        transition: top 0.5s ease-out;
     }
 
         .arc--out {
@@ -162,7 +214,7 @@
                 position: absolute;
                 height: 170%;
                 width: 170%;
-                background: linear-gradient(to top, var(--primary-color) 0%, var(--primary-color) 40%, transparent 70%, transparent 100%);
+                background: linear-gradient(to top, var(--primary-color) 0%, var(--primary-color) 60%, transparent 90%, transparent 100%);
                 top: 100%;
                 left: 50%;
                 border-radius: 0 0 100% 100%;
@@ -170,10 +222,10 @@
                 transform-origin: top;
                 transform: translateX(-50%);
             }
-            &:hover::before {
+        }
+            .arc--out--activate::before {
                 transform: translateX(-50%) rotate(180deg);
             }
-        }
 
         .arc--in {
             top: 218px;
@@ -182,12 +234,19 @@
             background: var(--white-color)
         }
 
+            .arc--out-hidden,
+            .arc--in-hidden {
+                top: 100%;
+            }
+
     .car-info {
         position: absolute;
         top: 86px;
         width: 1200px;
         left: 50%;
         transform: translateX(-50%);
+        opacity: 1;
+        transition: opacity 0.5s ease-out;
     }
 
         .car-info__header {
@@ -212,7 +271,13 @@
             position: absolute;
             top: 21px;
             right: 0;
+            transform: scale(0.9) translate(10%, -5%);
+            transition: transform 20s ease-out;
         }
+
+            .car-info__imagem--animate {
+                transform: scale(1) translate(0, 0);
+            }
 
         .car-info__stats {
             display: block;
@@ -360,5 +425,9 @@
             b {
                 color: var(--base-color);
             }
+        }
+
+        .translucid {
+            opacity: 0;
         }
 </style>
