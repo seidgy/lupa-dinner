@@ -8,136 +8,61 @@
             </nuxt-link>
             <powered-by :horizontal="true"></powered-by>
         </div>
-        <div class="car-info translucid" id="perfil1">
+        <div class="car-info translucid hidden" id="perfil">
             <div class="car-info__header">
                 <p>Seu carro ideal é</p>
-                <h1 class="car-info__title">Hillux SW4 - 2024</h1>
+                <h1 class="car-info__title">{{ data.carro.hl.nome }}</h1>
             </div>
-            <img src="/images/carros/hilux-front.svg" alt="Hillux SW4" class="car-info__imagem">
+            <img :src="`/images/carros/${data.carro.hl.image}`" :alt="data.carro.hl.nome" class="car-info__imagem">
             <div class="car-info__stats">
                 <p class="subtitulo">Valor médio</p>
-                <p class="preco">R$ <b>395</b>.000</p>
+                <p class="preco" v-html="data.carro.hl.preco"></p>
                 <p class="subtitulo">Características</p>
                 <div class="car-info__cards">
                     <div class="car-info__card">
                         <img src="/public/images/gas.svg" alt="Combustível" class="car-info__card-icon" />
                         <p class="car-info__subtle">Combustível</p>
-                        <p class="car-info__info">Diesel</p>
+                        <p class="car-info__info">{{ data.carro.hl.combustivel }}</p>
                     </div>
                     <div class="car-info__card">
                         <img src="/public/images/velo.svg" alt="Transmissão" class="car-info__card-icon" />
                         <p class="car-info__subtle">Transmissão</p>
-                        <p class="car-info__info">Automático</p>
+                        <p class="car-info__info">{{ data.carro.hl.transimssao }}</p>
                     </div>
                     <div class="car-info__card">
                         <img src="/public/images/seat.svg" alt="Assentos" class="car-info__card-icon" />
                         <p class="car-info__subtle">Lugares</p>
-                        <p class="car-info__info">7 lugares</p>
+                        <p class="car-info__info">{{ data.carro.hl.lugares }}</p>
                     </div>
                 </div>
-                <nuxt-link to="https://www.toyota.com.br/modelos/sw4" target="_blank" class="car-info__button button" size="l" visual="primary" color="primary">Saiba mais</nuxt-link>
+                <nuxt-link :to="data.carro.hl.link" target="_blank" class="car-info__button button" size="l" visual="primary" color="primary">Saiba mais</nuxt-link>
             </div>
             <div class="outros">
                 <p class="subtitulo">Você também pode gostar:</p>
                 <div class="outros__cards">
-                    <div class="outros__card">
-                        <h3 class="outros__title">CR-V</h3>
-                        <p class="outros__subtitle">Honda</p>
-                        <img src="/images/carros/crv-side.png" alt="Honda CR-V" class="outros__image" />
+                    <div class="outros__card" v-for="car in data.carro.list" v-bind:key="car.nome">
+                        <h3 class="outros__title">{{ car.nome }}</h3>
+                        <p class="outros__subtitle">{{ car.marca }}</p>
+                        <div class="outros__image">
+                            <img :src="`/images/carros/${car.image}`" :alt="`${car.marca} ${car.nome}`" class="" />
+                        </div>
                         <div class="outros__stats">
                             <div class="outros__stat">
                                 <img src="/images/gas.svg" alt="Combustível" class="outros__stat-icon" />
-                                <p class="outros__stat-info">Gas.</p>
+                                <p class="outros__stat-info">{{ car.combustivel }}</p>
                             </div>
                             <div class="outros__stat">
                                 <img src="/images/velo.svg" alt="Transmissão" class="outros__stat-icon" />
-                                <p class="outros__stat-info">Autom.</p>
+                                <p class="outros__stat-info">{{ car.transimssao }}</p>
                             </div>
                             <div class="outros__stat">
                                 <img src="/images/seat.svg" alt="Assentos" class="outros__stat-icon" />
-                                <p class="outros__stat-info">5 lugares</p>
+                                <p class="outros__stat-info">{{car.lugares}}</p>
                             </div>
                         </div>
                         <div class="outros__footer">
-                            <p class="outros__preco">
-                                R$ <b>380</b>.000
-                            </p>
-                            <nuxt-link to="https://www.honda.com.br/automoveis/crv" target="_blank" class="button" size="s" visual="primary" color="primary">Saiba mais</nuxt-link>
-                        </div>
-                    </div>
-                    <div class="outros__card">
-                        <h3 class="outros__title">Trailblazer</h3>
-                        <p class="outros__subtitle">Chevrolet</p>
-                        <img src="/images/carros/trailblazer-side.png" alt="Chevrolet Trailblazer" class="outros__image" />
-                        <div class="outros__stats">
-                            <div class="outros__stat">
-                                <img src="/images/gas.svg" alt="Combustível" class="outros__stat-icon" />
-                                <p class="outros__stat-info">Gas.</p>
-                            </div>
-                            <div class="outros__stat">
-                                <img src="/images/velo.svg" alt="Transmissão" class="outros__stat-icon" />
-                                <p class="outros__stat-info">Autom.</p>
-                            </div>
-                            <div class="outros__stat">
-                                <img src="/images/seat.svg" alt="Assentos" class="outros__stat-icon" />
-                                <p class="outros__stat-info">5 lugares</p>
-                            </div>
-                        </div>
-                        <div class="outros__footer">
-                            <p class="outros__preco">
-                                R$ <b>370</b>.000
-                            </p>
-                            <nuxt-link to="https://www.chevrolet.com.br/suvs/novo-trailblazer" target="_blank" class="button" size="s" visual="primary" color="primary">Saiba mais</nuxt-link>
-                        </div>
-                    </div>
-                    <div class="outros__card">
-                        <h3 class="outros__title">Pajero Sport</h3>
-                        <p class="outros__subtitle">Mitsubishi</p>
-                        <img src="/images/carros/pajero-side.png" alt="Mitsubishi Pajero Sport" class="outros__image" />
-                        <div class="outros__stats">
-                            <div class="outros__stat">
-                                <img src="/images/gas.svg" alt="Combustível" class="outros__stat-icon" />
-                                <p class="outros__stat-info">Gas.</p>
-                            </div>
-                            <div class="outros__stat">
-                                <img src="/images/velo.svg" alt="Transmissão" class="outros__stat-icon" />
-                                <p class="outros__stat-info">Autom.</p>
-                            </div>
-                            <div class="outros__stat">
-                                <img src="/images/seat.svg" alt="Assentos" class="outros__stat-icon" />
-                                <p class="outros__stat-info">7 lugares</p>
-                            </div>
-                        </div>
-                        <div class="outros__footer">
-                            <p class="outros__preco">
-                                R$ <b>340</b>.000
-                            </p>
-                            <nuxt-link to="https://www.mitsubishimotors.com.br/suv-e-crossovers/pajero-sport-2022" target="_blank" class="button" size="s" visual="primary" color="primary">Saiba mais</nuxt-link>
-                        </div>
-                    </div>
-                    <div class="outros__card">
-                        <h3 class="outros__title">X3</h3>
-                        <p class="outros__subtitle">BMW</p>
-                        <img src="/images/carros/x3-side.png" alt="BMW X3" class="outros__image" />
-                        <div class="outros__stats">
-                            <div class="outros__stat">
-                                <img src="/images/gas.svg" alt="Combustível" class="outros__stat-icon" />
-                                <p class="outros__stat-info">Híb.</p>
-                            </div>
-                            <div class="outros__stat">
-                                <img src="/images/velo.svg" alt="Transmissão" class="outros__stat-icon" />
-                                <p class="outros__stat-info">Manual</p>
-                            </div>
-                            <div class="outros__stat">
-                                <img src="/images/seat.svg" alt="Assentos" class="outros__stat-icon" />
-                                <p class="outros__stat-info">5 lugares</p>
-                            </div>
-                        </div>
-                        <div class="outros__footer">
-                            <p class="outros__preco">
-                                R$ <b>440</b>.000
-                            </p>
-                            <nuxt-link to="https://www.bmw.com.br/pt/all-models/x-series/x3/2021/bmw-x3.html" target="_blank" class="button" size="s" visual="primary" color="primary">Saiba mais</nuxt-link>
+                            <p class="outros__preco" v-html="car.preco"></p>
+                            <nuxt-link :to="car.link" target="_blank" class="button" size="s" visual="primary" color="primary">Saiba mais</nuxt-link>
                         </div>
                     </div>
                 </div>
@@ -147,9 +72,294 @@
 </template>
 
 <script setup>
-import { onMounted } from 'vue';
+import { onMounted, reactive } from 'vue';
+const route = useRoute();
+
+const perfis = [
+    
+    {
+        id: 0,
+        hl: {
+            nome: 'City Hatchback - 2023',
+            image: 'city-front.svg',
+            preco: 'R$ <b>95</b>.000',
+            combustivel: 'Flex',
+            transimssao: 'Manual',
+            lugares: '5 lugares',
+            link: 'https://www.honda.com.br/automoveis/newcityhatchback',
+        },
+        list: [
+            {
+                nome: 'Polo GTS',
+                marca: 'Volkswagen',
+                image: 'polo-side.png',
+                preco: 'R$ <b>115</b>.000',
+                combustivel: 'Flex',
+                transimssao: 'Man.',
+                lugares: '5 lugares',
+                link: 'https://www.vw.com.br/pt/carros/polo.html'
+            },
+            {
+                nome: '208',
+                marca: 'Peugeot',
+                image: '208-side.png',
+                preco: 'R$ <b>100</b>.000',
+                combustivel: 'Flex',
+                transimssao: 'Man.',
+                lugares: '5 lugares',
+                link: 'https://carros.peugeot.com.br/gama/peugeot-208.html'
+            },
+            {
+                nome: 'Argo',
+                marca: 'Fiat',
+                image: 'argo-side.png',
+                preco: 'R$ <b>85</b>.000',
+                combustivel: 'Flex',
+                transimssao: 'Man.',
+                lugares: '5 lugares',
+                link: 'https://argo.fiat.com.br/'
+            },
+            {
+                nome: 'Onix',
+                marca: 'Chevrolet',
+                image: 'onix-side.png',
+                preco: 'R$ <b>70</b>.000',
+                combustivel: 'Flex',
+                transimssao: 'Man.',
+                lugares: '5 lugares',
+                link: 'https://www.chevrolet.com.br/carros/novo-onix'
+            }
+        ]
+    },
+    {
+        id: 1,
+        hl: {
+            nome: 'Hillux SW4 - 2024',
+            image: 'hilux-front.svg',
+            preco: 'R$ <b>395</b>.000',
+            combustivel: 'Diesel',
+            transimssao: 'Automático',
+            lugares: '7 lugares',
+            link: 'https://www.toyota.com.br/modelos/sw4',
+        },
+        list: [
+            {
+                nome: 'CR-V',
+                marca: 'Honda',
+                image: 'crv-side.png',
+                preco: 'R$ <b>380</b>.000',
+                combustivel: 'Gas.',
+                transimssao: 'Autom.',
+                lugares: '5 lugares',
+                link: 'https://www.honda.com.br/automoveis/crv'
+            },
+            {
+                nome: 'Trailblazer',
+                marca: 'Chevrolet',
+                image: 'trailblazer-side.png',
+                preco: 'R$ <b>370</b>.000',
+                combustivel: 'Gas.',
+                transimssao: 'Autom.',
+                lugares: '5 lugares',
+                link: 'https://www.chevrolet.com.br/suvs/novo-trailblazer'
+            },
+            {
+                nome: 'Pajero Sport',
+                marca: 'Mitsubishi',
+                image: 'pajero-side.png',
+                preco: 'R$ <b>340</b>.000',
+                combustivel: 'Gas.',
+                transimssao: 'Autom.',
+                lugares: '7 lugares',
+                link: 'https://www.mitsubishimotors.com.br/suv-e-crossovers/pajero-sport-2022'
+            },
+            {
+                nome: 'X3',
+                marca: 'BMW',
+                image: 'x3-side.png',
+                preco: 'R$ <b>440</b>.000',
+                combustivel: 'Híb.',
+                transimssao: 'Man.',
+                lugares: '5 lugares',
+                link: 'https://www.bmw.com.br/pt/all-models/x-series/x3/2021/bmw-x3.html'
+            }
+        ]
+    },
+    
+    
+    {
+        id: 2,
+        hl: {
+            nome: 'C3 LIVE PLUS',
+            image: 'c3-front.webp',
+            preco: 'R$ <b>80</b>.000',
+            combustivel: 'Flex',
+            transimssao: 'Automático',
+            lugares: '5 lugares',
+            link: 'https://www.citroen.com.br/veiculos-passeio/citroen-c3.html',
+        },
+        list: [
+            {
+                nome: '208',
+                marca: 'Peugeot',
+                image: '208-side.png',
+                preco: 'R$ <b>100</b>.000',
+                combustivel: 'Flex',
+                transimssao: 'Man.',
+                lugares: '5 lugares',
+                link: 'https://carros.peugeot.com.br/gama/peugeot-208.html'
+            },
+            {
+                nome: 'Cruze Sport',
+                marca: 'Chevrolet',
+                image: 'cruze-sport-side.webp',
+                preco: 'R$ <b>150</b>.000',
+                combustivel: 'Flex',
+                transimssao: 'Man.',
+                lugares: '5 lugares',
+                link: 'https://www.chevrolet.com.br/carros/novo-cruze-rs'
+            },
+            {
+                nome: 'Polo GTS',
+                marca: 'Volkswagen',
+                image: 'polo-side.png',
+                preco: 'R$ <b>115</b>.000',
+                combustivel: 'Flex',
+                transimssao: 'Man.',
+                lugares: '5 lugares',
+                link: 'https://www.vw.com.br/pt/carros/polo.html'
+            },
+            {
+                nome: 'Argo',
+                marca: 'Fiat',
+                image: 'argo-side.png',
+                preco: 'R$ <b>85</b>.000',
+                combustivel: 'Flex',
+                transimssao: 'Man.',
+                lugares: '5 lugares',
+                link: 'https://argo.fiat.com.br/'
+            },
+        ]
+    },
+    
+    {
+        id: 3,
+        hl: {
+            nome: 'Virtus exclusive - 2024',
+            image: 'virtus-front.svg',
+            preco: 'R$ <b>120</b>.000',
+            combustivel: 'Flex',
+            transimssao: 'Manual',
+            lugares: '5 lugares',
+            link: 'https://www.vw.com.br/pt/carros/virtus.html',
+        },
+        list: [
+            {
+                nome: 'Cruze',
+                marca: 'Chevrolet',
+                image: 'cruze-side.png',
+                preco: 'R$ <b>140</b>.000',
+                combustivel: 'Gas.',
+                transimssao: 'Autom.',
+                lugares: '5 lugares',
+                link: 'https://www.chevrolet.com.br/carros/novo-cruze'
+            },
+            {
+                nome: 'Civic',
+                marca: 'Honda',
+                image: 'civic-side.png',
+                preco: 'R$ <b>235</b>.000',
+                combustivel: 'Híb.',
+                transimssao: 'Autom.',
+                lugares: '5 lugares',
+                link: 'https://www.honda.com.br/automoveis/civic'
+            },
+            {
+                nome: 'Corola',
+                marca: 'Toyota',
+                image: 'corola-side.png',
+                preco: 'R$ <b>155</b>.000',
+                combustivel: 'Gas.',
+                transimssao: 'Autom.',
+                lugares: '5 lugares',
+                link: 'https://www.toyota.com.br/modelos/corolla'
+            },
+            {
+                nome: '320',
+                marca: 'BMW',
+                image: '320-side.png',
+                preco: 'R$ <b>325</b>.000',
+                combustivel: 'Híb.',
+                transimssao: 'Autom.',
+                lugares: '5 lugares',
+                link: 'https://www.bmw.com.br/pt/all-models/3-series/sedan/2021/bmw-320i.html'
+            }
+        ]
+    },
+]
+
+const data = reactive({
+    carro: 
+    {
+        id: 1,
+        hl: {
+            nome: 'Hillux SW4 - 2024',
+            image: 'hilux-front.svg',
+            preco: 'R$ <b>395</b>.000',
+            combustivel: 'Diesel',
+            transimssao: 'Automático',
+            lugares: '7 lugares',
+            link: 'https://www.toyota.com.br/modelos/sw4',
+        },
+        list: [
+            {
+                nome: 'CR-V',
+                marca: 'Honda',
+                image: 'crv-side.png',
+                preco: 'R$ <b>380</b>.000',
+                combustivel: 'Gas.',
+                transimssao: 'Autom.',
+                lugares: '5 lugares',
+                link: 'https://www.honda.com.br/automoveis/crv'
+            },
+            {
+                nome: 'Trailblazer',
+                marca: 'Chevrolet',
+                image: 'trailblazer-side.png',
+                preco: 'R$ <b>370</b>.000',
+                combustivel: 'Gas.',
+                transimssao: 'Autom.',
+                lugares: '5 lugares',
+                link: 'https://www.chevrolet.com.br/suvs/novo-trailblazer'
+            },
+            {
+                nome: 'Pajero Sport',
+                marca: 'Mitsubishi',
+                image: 'pajero-side.png',
+                preco: 'R$ <b>340</b>.000',
+                combustivel: 'Gas.',
+                transimssao: 'Autom.',
+                lugares: '7 lugares',
+                link: 'https://www.mitsubishimotors.com.br/suv-e-crossovers/pajero-sport-2022'
+            },
+            {
+                nome: 'X3',
+                marca: 'BMW',
+                image: 'x3-side.png',
+                preco: 'R$ <b>440</b>.000',
+                combustivel: 'Híb.',
+                transimssao: 'Man.',
+                lugares: '5 lugares',
+                link: 'https://www.bmw.com.br/pt/all-models/x-series/x3/2021/bmw-x3.html'
+            }
+        ]
+    }
+});
 
 onMounted(() => {
+    const id = route.query && route.query.tipo ? route.query.tipo : 1;
+    data.carro = perfis.find(p => p.id === parseInt(id));
+    document.querySelector('.car-info').classList.remove('hidden');
     window.setTimeout(() => {
         document.querySelector('.arc--out').classList.remove('arc--out-hidden');
     }, 200);
@@ -305,7 +515,7 @@ onMounted(() => {
                 color: var(--base-color);
                 font-size: 4.125em;
                 margin-bottom: 34px;
-                b {
+                :deep(b) {
                     color: var(--base-color);
                 }
             }
@@ -382,6 +592,9 @@ onMounted(() => {
         .outros__image {
             width: 200px;
             margin: 0 auto 32px;
+            display: flex;
+            align-items: center;
+            height: 100px;
         }
 
         .outros__stats {
@@ -422,12 +635,16 @@ onMounted(() => {
             font-size: 1.5em;
             font-weight: 400;
             color: var(--base-color);
-            b {
+            :deep(b) {
                 color: var(--base-color);
             }
         }
 
         .translucid {
             opacity: 0;
+        }
+
+        .hidden {
+            display: none;
         }
 </style>
