@@ -36,25 +36,27 @@
                     <p class="tab-content__subtitle">Nos fale um pouco sobre a sua renda e sobre o seu crédito hoje.</p>
                     <p class="tab-content__subtitle">Todos os dados coletados aqui são de uso seguro.</p>
                 </div>
-                <div class="tab-content__form">
+                <form class="tab-content__form" ref="infoCredito">
                     <div>
                         <h4 class="tab-content__form-title">Qual a sua renda ?</h4>
                         <p class="tab-content__form-subtitle">Fale a sua renda bruta na data de hoje.</p>
                     </div>
                     <div class="form-field">
+                        <span class="error-message" v-if="errors.renda">{{ errors.renda }}</span>
                         <label for="renda" class="form-label">Renda bruta:</label>
-                        <input type="text" id="renda" name="renda" class="form-input" placeholder="R$ 10.000,00" />
+                        <input type="text" id="renda" name="renda" class="form-input" placeholder="R$ 10.000,00" validate="required numeric" />
                     </div>
                     <div class="form-field form-field--select" :class="{'form-field--select-open': data.credito}">
+                        <span class="error-message" v-if="errors.credito">{{ errors.credito }}</span>
                         <label for="credito" class="form-label">Situação de crédito:</label>
-                        <input type="text" id="credito" name="credito" class="form-input form-select" placeholder="Selecione" readonly @focus="toggleSelect('credito')" @blur="toggleSelect('credito')"/>
+                        <input type="text" id="credito" name="credito" class="form-input form-select" placeholder="Selecione" readonly @focus="toggleSelect('credito')" @blur="toggleSelect('credito')" validate="required"/>
                         <div class="selectionBox">
                             <div class="selectionBox__item" @click="setValue('credito', 'Crédito normal')">Crédito normal</div>
                             <div class="selectionBox__item" @click="setValue('credito', 'Crédito suspenso')">Crédito suspenso</div>
                             <div class="selectionBox__item" @click="setValue('credito', 'Sem bloqueio')">Sem bloqueio</div>
                         </div>
                     </div>
-                </div>
+                </form>
             </div>
             <div class="tab-content" :class="{'left': data.currentTab > 1, 'right': data.currentTab < 1}">
                 <h3 class="tab-content__title">Quem é você?</h3>
@@ -62,30 +64,31 @@
                     <p class="tab-content__subtitle">Nos conte um pouco sobre você e como você se identifica hoje.</p>
                     <p class="tab-content__subtitle">Todos os dados coletados aqui são de uso seguro.</p>
                 </div>
-                <div class="tab-content__form">
+                <form class="tab-content__form" ref="infoCliente">
                     <div>
                         <h4 class="tab-content__form-title">Dados demográficos</h4>
                         <p class="tab-content__form-subtitle">Fale um pouco sobre você.</p>
                     </div>
                     <div class="form-field">
+                        <span class="error-message" v-if="errors.genero">{{ errors.genero }}</span>
                         <label class="form-label">Com qual gênero você se identifica?</label>
                         <div class="form-field__checkboxes">
                             <div class="form-field__checkbox">
-                                <input type="radio" class="input-check" id="genero-masculino" name="genero" value="masculino" />
+                                <input type="radio" class="input-check" id="genero-masculino" name="genero" value="masculino" validate="required" />
                                 <label for="genero-masculino" class="check-label">
                                     <span class="material-symbols-outlined">done</span>
                                 </label>
                                 <label for="genero-masculino" class="check-text-label">Masculino</label>
                             </div>
                             <div class="form-field__checkbox">
-                                <input type="radio" class="input-check" id="genero-feminino" name="genero" value="feminino" />
+                                <input type="radio" class="input-check" id="genero-feminino" name="genero" value="feminino" validate="required" />
                                 <label for="genero-feminino" class="check-label">
                                     <span class="material-symbols-outlined">done</span>
                                 </label>
                                 <label for="genero-feminino" class="check-text-label">Feminino</label>
                             </div>
                             <div class="form-field__checkbox">
-                                <input type="radio" class="input-check" id="genero-outro" name="genero" value="outro" />
+                                <input type="radio" class="input-check" id="genero-outro" name="genero" value="outro" validate="required" />
                                 <label for="genero-outro" class="check-label">
                                     <span class="material-symbols-outlined">done</span>
                                 </label>
@@ -94,20 +97,22 @@
                         </div>
                     </div>
                     <div class="form-field">
-                        <label for="data" class="form-label">Data de nascimento:</label>
-                        <input type="date" id="data" name="data" class="form-input" placeholder="dd/mm/aaaa" />
+                        <span class="error-message" v-if="errors.data">{{ errors.data }}</span>
+                        <label for="dataNascimento" class="form-label">Data de nascimento:</label>
+                        <input type="date" id="dataNascimento" name="data" class="form-input" placeholder="dd/mm/aaaa" validate="required" />
                     </div>
                     <div class="form-field form-field--select" :class="{'form-field--select-open': data.estCivil}">
+                        <span class="error-message" v-if="errors['est-civil']">{{ errors['est-civil'] }}</span>
                         <label for="est-civil" class="form-label">Estado civil:</label>
-                        <input type="text" id="est-civil" name="est-civil" class="form-input form-select" placeholder="Selecione" readonly @focus="toggleSelect('estCivil')" @blur="toggleSelect('estCivil')"/>
+                        <input type="text" id="est-civil" name="est-civil" class="form-input form-select" validate="required" placeholder="Selecione" readonly @focus="toggleSelect('estCivil')" @blur="toggleSelect('estCivil')"/>
                         <div class="selectionBox">
-                            <div class="selectionBox__item" @click="setValue('est-civil', 'Solteiro(a)')">Solteiro(a)</div>
-                            <div class="selectionBox__item" @click="setValue('est-civil', 'Casado(a)')">Casado(a)</div>
-                            <div class="selectionBox__item" @click="setValue('est-civil', 'Divorciado(a)')">Divorciado(a)</div>
-                            <div class="selectionBox__item" @click="setValue('est-civil', 'Viúvo(a)')">Viúvo(a)</div>
+                            <div class="selectionBox__item" @click="setValue('est-civil', 'Solteiro')">Solteiro(a)</div>
+                            <div class="selectionBox__item" @click="setValue('est-civil', 'Casado')">Casado(a)</div>
+                            <div class="selectionBox__item" @click="setValue('est-civil', 'Divorciado')">Divorciado(a)</div>
+                            <div class="selectionBox__item" @click="setValue('est-civil', 'Viúvo')">Viúvo(a)</div>
                         </div>
                     </div>
-                </div>
+                </form>
             </div>
             <div class="tab-content" :class="{'right': data.currentTab < 2}">
                 <h3 class="tab-content__title">Aonde você mora?</h3>
@@ -115,7 +120,7 @@
                     <p class="tab-content__subtitle">Nos conte aonde você mora.</p>
                     <p class="tab-content__subtitle">Todos os dados coletados aqui são de uso seguro.</p>
                 </div>
-                <div class="tab-content__form">
+                <form class="tab-content__form" ref="infoLocalidade">
                     <div>
                         <h4 class="tab-content__form-title">Dados geográficos</h4>
                         <p class="tab-content__form-subtitle">Fale um pouco sobre onde você mora.</p>
@@ -132,7 +137,7 @@
                         <label class="form-label" for="bairro">Bairro:</label>
                         <input type="text" id="bairro" name="bairro" class="form-input" placeholder="Asa Norte" />
                     </div>
-                </div>
+                </form>
             </div>
         </div>
         <button class="button button--icon previous-button" visual="primary" color="primary" @click="previous" icon-before="arrow_back" v-if="data.currentTab > 0">
@@ -146,6 +151,8 @@
 
 <script setup>
     import { reactive } from 'vue';
+    import { useValidation } from "~/composables/useFormValidation";
+    import { usePerfis } from "~/composables/usePerfis";
     const router = useRouter();
 
     const data = reactive({
@@ -153,8 +160,30 @@
         credito: false,
         estCivil: false
     });
+    const { validateForm, errors, hasErrors } = useValidation()
+    const infoCredito = ref()
+    const infoCliente = ref()
+    const infoLocalidade = ref()
 
     const next = () => {
+        if(data.currentTab == 0) {
+            validateForm(infoCredito.value)
+            if(hasErrors.value) {
+                return
+            }
+        }
+        if(data.currentTab == 1) {
+            validateForm(infoCliente.value)
+            if(hasErrors.value) {
+                return
+            }
+        }
+        if(data.currentTab == 2) {
+            validateForm(infoLocalidade.value)
+            if(hasErrors.value) {
+                return
+            }
+        }
         if (data.currentTab < 2) {
             data.currentTab++;
             document.getElementById(`tab-${data.currentTab}`).classList.add('tab--active');
@@ -163,17 +192,17 @@
         } else {
             data.currentTab++;
             window.setTimeout(() => {
+                const renda = document.getElementById('renda').value;
+                const dataNascimento = document.getElementById('dataNascimento').value;
+                const genero = document.querySelector('input[name="genero"]:checked').value;
                 const estadoCivil = document.getElementById('est-civil').value;
-                let perfil = '';
-                if (estadoCivil === 'Solteiro(a)') {
-                    perfil = '2';
-                } else if (estadoCivil === 'Casado(a)') {
-                    perfil = '3';
-                } else if (estadoCivil === 'Divorciado(a)') {
-                    perfil = '0';
-                } else if (estadoCivil === 'Viúvo(a)') {
-                    perfil = '1';
+                const dados = {
+                    renda: renda,
+                    dataNascimento: dataNascimento,
+                    genero: genero,
+                    estadoCivil: estadoCivil,
                 }
+                let perfil = encontrarPerfil(dados);
                 router.push(`/resultado?tipo=${perfil}`);
             }, 600);
         }
@@ -188,6 +217,24 @@
         }
     }
 
+    function calcularIdade(dataNascimento) {
+        const partes = dataNascimento.split('-');
+        const ano = parseInt(partes[0], 10);
+        const mes = parseInt(partes[1], 10) - 1; // Meses em JavaScript são indexados a partir de 0
+        const dia = parseInt(partes[2], 10);
+        
+        const nascimento = new Date(ano, mes, dia);
+        const hoje = new Date();
+        let idade = hoje.getFullYear() - nascimento.getFullYear();
+        const diferencaMeses = hoje.getMonth() - mes;
+
+        if (diferencaMeses < 0 || (diferencaMeses === 0 && hoje.getDate() < dia)) {
+            idade--;
+        }
+
+        return idade;
+    }
+
     const toggleSelect = (field) => {
         window.setTimeout(() => {
             data[field] = !data[field];
@@ -196,6 +243,57 @@
 
     const setValue = (field, value) => {
         document.getElementById(field).value = value;
+    }
+
+    const encontrarPerfil = (dados) => {
+        const idade = calcularIdade(dados.dataNascimento);
+        const estadoCivil = dados.estadoCivil === 'Viúvo(a)' || dados.estadoCivil === 'Divorciado(a)' ? 'Outros' : dados.estadoCivil;
+        
+        const criterios = [
+            perfil => (perfil.rendaMin === null || dados.renda >= perfil.rendaMin) &&
+                    (perfil.rendaMax === null || dados.renda <= perfil.rendaMax) &&
+                    (perfil.idadeMin === null || idade >= perfil.idadeMin) &&
+                    (perfil.idadeMax === null || idade <= perfil.idadeMax) &&
+                    (perfil.genero === null || dados.genero.toLowerCase() === perfil.genero.toLowerCase()) &&
+                    (perfil.estadoCivil === null || estadoCivil === perfil.estadoCivil),
+            perfil => (perfil.idadeMin === null || idade >= perfil.idadeMin) &&
+                    (perfil.idadeMax === null || idade <= perfil.idadeMax) &&
+                    (perfil.genero === null || dados.genero.toLowerCase() === perfil.genero.toLowerCase()) &&
+                    (perfil.estadoCivil === null || estadoCivil === perfil.estadoCivil),
+            perfil => (perfil.genero === null || dados.genero.toLowerCase() === perfil.genero.toLowerCase()) &&
+                    (perfil.estadoCivil === null || estadoCivil === perfil.estadoCivil),
+            perfil => perfil.estadoCivil === null || estadoCivil === perfil.estadoCivil
+        ];
+
+
+        const { perfis } = usePerfis();
+         
+        for (let perfil of perfis.value) {
+            if (
+                (perfil.rendaMin === null || dados.renda >= perfil.rendaMin) &&
+                (perfil.rendaMax === null || dados.renda <= perfil.rendaMax) &&
+                (perfil.idadeMin === null || idade >= perfil.idadeMin) &&
+                (perfil.idadeMax === null || idade <= perfil.idadeMax) &&
+                (perfil.genero === null || dados.genero.toLowerCase() === perfil.genero.toLowerCase()) &&
+                (perfil.estadoCivil === null || estadoCivil === perfil.estadoCivil)
+            ) {
+                return perfil.categoria;
+            }
+        }
+
+        // Se não encontrar correspondência exata
+        let perfil = null;
+        if (dados.estadoCivil == 'Solteiro') {
+            perfil = '2';
+        } else if (dados.estadoCivil == 'Casado') {
+            perfil = '3';
+        } else if (dados.estadoCivil == 'Divorciado') {
+            perfil = '0';
+        } else if (dados.estadoCivil == 'Viúvo') {
+            perfil = '1';
+        }
+
+        return perfil;
     }
 </script>
 
@@ -544,5 +642,13 @@ main {
 
 .hidden {
     display: none;
+}
+
+.error-message {
+  background-color: #F8D7DA; /* Cor de fundo vermelho claro */
+  color: #8B0000; /* Cor de fonte vermelho escuro */
+  font-size: 0.75em;
+  padding: 8px 6px;
+  border-radius: 3px;
 }
 </style>
