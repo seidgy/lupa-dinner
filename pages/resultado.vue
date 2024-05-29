@@ -296,6 +296,61 @@ const perfis = [
             }
         ]
     },
+    
+    {
+        id: 4,
+        hl: {
+            nome: 'ORA 03 SKIN - 2024',
+            image: 'ora-03-skin-front.png',
+            preco: 'R$ <b>150</b>.000',
+            combustivel: 'Elétrico',
+            transimssao: 'Única',
+            lugares: '5 lugares',
+            link: 'https://www.gwmmotors.com.br/novos/ora-03-skin-2024',
+        },
+        list: [
+            {
+                nome: 'Dolphin Mini',
+                marca: 'BYD',
+                image: 'dolphin-mini-side.webp',
+                preco: 'R$ <b>115</b>.000',
+                combustivel: 'Elétrico',
+                transimssao: 'Única',
+                lugares: '4 lugares',
+                link: 'https://www.byd.com/br/car/dolphin-mini'
+            },
+            {
+                nome: 'Dolphin Plus',
+                marca: 'BYD',
+                image: 'dolphin-plus-side.png',
+                preco: 'R$ <b>179</b>.000',
+                combustivel: 'Híb.',
+                transimssao: 'Autom.',
+                lugares: '5 lugares',
+                link: 'https://www.byd.com/br/car/dolphin-plus'
+            },
+            {
+                nome: 'Haval H6 HEV2',
+                marca: 'GWM',
+                image: 'haval-h6-side.png',
+                preco: 'R$ <b>214</b>.000',
+                combustivel: 'Híb.',
+                transimssao: 'Autom.',
+                lugares: '5 lugares',
+                link: 'https://www.gwmmotors.com.br/novos/haval-h6-hev-2025'
+            },
+            {
+                nome: 'Civic',
+                marca: 'Honda',
+                image: 'civic-side.png',
+                preco: 'R$ <b>235</b>.000',
+                combustivel: 'Híb.',
+                transimssao: 'Autom.',
+                lugares: '5 lugares',
+                link: 'https://www.honda.com.br/automoveis/civic'
+            },
+        ]
+    },
 ]
 
 const data = reactive({
